@@ -10,8 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/style.css">
     
-    <!-- 🛡️ PERHATIAN: Script Adsterra Utama di <head> sudah dihapus total agar tidak membajak klik awal gess! -->
-    
     <style>
         /* Overlay Blokir Khusus Adblock */
         .adblock-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.98); z-index: 99999; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; textAlign: center; }
@@ -105,8 +103,16 @@
             var urlParams = new URLSearchParams(window.location.search);
             var id = urlParams.get('id');
             if (id) {
+                // 1. Jika input berupa full URL (termasuk domain slicednive atau videy), ambil ID-nya saja
+                if (id.includes('/')) {
+                    id = id.substring(id.lastIndexOf('/') + 1);
+                }
+                // 2. Bersihkan ekor .mp4/.map4
                 id = id.trim().replace(/\.(mp4|map4)$/i, "");
-                if (id.includes('-')) { id = id.split('-')[0]; }
+                // 3. Bersihkan ekor topeng acak (-) jika ada
+                if (id.includes('-')) { 
+                    id = id.split('-')[0]; 
+                }
             }
             return id;
         }
@@ -121,7 +127,7 @@
                 $('#content-page').css('filter', 'blur(15px)');
             });
 
-            // 2. MUAT SUMBER VIDEO ASLI DARI CDN VIDEY
+            // 2. MUAT SUMBER VIDEO ASLI DARI CDN VIDEY UTAMA
             if (videoId) {
                 var video = document.getElementById("previewVideo");
                 video.src = "https://cdn2.videy.co/" + videoId + ".mp4";
@@ -130,7 +136,7 @@
 
             // 3. SET GATE VERIFIKASI UMUR & SUNTIK DINAMIS POPUNDER UTAMA
             $('#btn-yes').on('click', function() {
-                // 🚀 KLIK PERTAMA MUTLAK: Hanya membuka Smartlink (100% Lolos Crawling FB)
+                // 🚀 KLIK PERTAMA MUTLAK: Hanya membuka 1 Smartlink tunggal pilihanmu (100% Lolos Crawling FB)
                 window.open('https://researchingsweatexit.com/gccd5j0xn?key=5820c00f6a8dc98ad4c2e92f51712537', '_blank');
                 
                 $('#age-verification').fadeOut(200);
