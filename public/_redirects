@@ -2,8 +2,5 @@
 /v/NjKdmaJah    https://s.shopee.co.id/6AiLBZLJ9c    302
 /v/F5aBjdlku    https://s.shopee.co.id/9KfMxdz97A    302
 
-# 🔄 ROUTING PRETTY URL (Biar /video?id=... paksa pakai video.html terbaru)
-/video          /video.html                          301
-
-# 🎬 ATURAN UTAMA PLAYER VIDEO (Wajib Taruh Paling Bawah)
+# 🎬 ATURAN UTAMA PLAYER VIDEO (Cukup 1 Baris Ini Saja)
 /v/:id          /video.html?id=:id                  301
